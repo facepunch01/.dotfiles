@@ -1,0 +1,8 @@
+.emacs.d/straight/
+.emacs.d/org-roam.db
+.emacs.d/recentf
+.emacs.d/eln-cache/
+.emacs.d/auto-save-list/
+.emacs.d/elpa/
+.emacs.d/org-persist/
+.emacs.d/history
