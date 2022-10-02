@@ -19,9 +19,6 @@
 (setq inhibit-startup-message t)
 
 
-(setq vc-follow-symlinks t)
-
-
 (use-package flyspell
   :hook org-mode-hook
   :config
