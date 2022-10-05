@@ -1,0 +1,1 @@
+("~/.macdots/" "~/org-roam/" "~/.doom.d/")
