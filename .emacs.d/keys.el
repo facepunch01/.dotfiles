@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (recentf-mode 1)
 (setq evil-want-keybinding nil)
 (use-package goto-chg)

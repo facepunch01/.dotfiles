@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (use-package flyspell
   :hook org-mode-hook
   :config

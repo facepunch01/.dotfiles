@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (setq
  ;; Edit settings
  org-auto-align-tags nil
@@ -25,7 +26,6 @@
  org-agenda-current-time-string
  "⭠ now ─────────────────────────────────────────────────")
 (use-package org
-  :commands org-mode
   :config
   (setq org-startup-indented t)
   (setq org-return-follows-link t)

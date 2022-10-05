@@ -1,6 +1,11 @@
-;; -*- no-byte-compile: t; -*-
-(set-face-attribute 'default nil :family "Iosevka" :height 110)
+;; -*- no-byte-compile: t;lexical-binding: t -*-
+(defvar doom--file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+(add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono")) 
+(setq frame-inhibit-implied-resize t)
 (defvar bootstrap-version)
+;;(setq straight-check-for-modifications '(check-on-save find-when-checking))
+(setq straight-check-for-modifications nil)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
       (bootstrap-version 6))
@@ -18,19 +23,16 @@
 (use-package gcmh
   :config
   (gcmh-mode 1))
-(setq gc-cons-threshold 402653184
+(setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
       gc-cons-percentage 0.6)
 (if (boundp 'comp-deferred-compilation)
     (setq comp-deferred-compilation nil)
     (setq native-comp-deferred-compilation nil))
 (setq load-prefer-newer noninteractive)
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "*** Emacs loaded in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
+(use-package benchmark-init
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
 (setq inhibit-startup-message t)
 (require 'bind-key)
 (require 'map)
@@ -41,13 +43,24 @@
   (auto-compile-on-save-mode))
 (setq vc-follow-symlinks t)
 (add-to-list 'load-path "~/.dotfiles/.emacs.d")
-
+(defun my/dashboard-banner ()
+  """Set a dashboard banner including information on package initialization
+   time and garbage collections."""
+  (setq dashboard-banner-logo-title
+        (format "Emacs ready in %.2f seconds with %d garbage collections."
+                (float-time (time-subtract after-init-time before-init-time)) gcs-done)))
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
 (set-fringe-mode 10)
 (menu-bar-mode -1) 
+(use-package page-break-lines
+  :init
+  (page-break-lines-mode))
 (use-package dashboard
+  :init
+  (add-hook 'after-init-hook 'dashboard-refresh-buffer)
+  (add-hook 'dashboard-mode-hook 'my/dashboard-banner)
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-startup-banner 'logo
@@ -68,8 +81,8 @@
 (autoload '+org/return "org-autoload.el" "org return")
 (autoload '+org/dwim-at-point "org-autoload.el" "org dwim")
 (autoload '+org/shift-return "org-autoload.el" "org shift-return")
-(autoload 'launch-separate-emacs-in-terminal "keys-autoload")
-(autoload 'launch-separate-emacs-under-x "keys-autoload")
+(autoload 'launch-separate-emacs-in-terminal "keys-autoload" "launch")
+(autoload 'launch-separate-emacs-under-x "keys-autoload" "launch")
 (autoload 'restart-emacs "keys-autoload" "restart emacs")
 
 
@@ -80,6 +93,4 @@
   :bind (:map projectile-mode-map
               ("C-x p" . projectile-command-map)))
 
-
-(use-package esup
-  :commands esup)
+(setq file-name-handler-alist doom--file-name-handler-alist)

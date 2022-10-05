@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (defun launch-separate-emacs-in-terminal ()
   (suspend-emacs "fg ; emacs -nw"))
 

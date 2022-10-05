@@ -1,4 +1,4 @@
-;;; org-autoload.el -*- lexical-binding: t; -*-
+;; -*- lexical-binding: t; -*-
 ;;;###autoload
 (defun +org/return ()
   "Call `org-return' then indent (if `electric-indent-mode' is on)."
