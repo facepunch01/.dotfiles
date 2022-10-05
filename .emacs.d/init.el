@@ -2,6 +2,20 @@
 (defvar doom--file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono")) 
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+(set-fringe-mode 10)
+(menu-bar-mode -1)
+(global-display-line-numbers-mode)
+(if (boundp 'comp-deferred-compilation)
+    (setq comp-deferred-compilation nil)
+    (setq native-comp-deferred-compilation nil))
+(setq load-prefer-newer noninteractive)
+(setq column-number-mode t)
+(setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
+      gc-cons-percentage 0.6)
+(setq native-comp-async-report-warnings-errors 'nil)
 (setq frame-inhibit-implied-resize t)
 (defvar bootstrap-version)
 ;;(setq straight-check-for-modifications '(check-on-save find-when-checking))
@@ -18,18 +32,9 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 (straight-use-package 'use-package)
-(setq native-comp-async-report-warnings-errors 'nil)
 (setq straight-use-package-by-default '1)
-(use-package gcmh
-  :config
-  (gcmh-mode 1))
-(setq gc-cons-threshold most-positive-fixnum ; 2^61 bytes
-      gc-cons-percentage 0.6)
-(if (boundp 'comp-deferred-compilation)
-    (setq comp-deferred-compilation nil)
-    (setq native-comp-deferred-compilation nil))
-(setq load-prefer-newer noninteractive)
 (use-package benchmark-init
+  :disabled
   :config
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
@@ -49,11 +54,7 @@
   (setq dashboard-banner-logo-title
         (format "Emacs ready in %.2f seconds with %d garbage collections."
                 (float-time (time-subtract after-init-time before-init-time)) gcs-done)))
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-(set-fringe-mode 10)
-(menu-bar-mode -1) 
+ 
 (use-package page-break-lines
   :init
   (page-break-lines-mode))
@@ -67,8 +68,6 @@
 	dashboard-center-content t))
 (setq modus-themes-mode-line '(borderless))
 (load-theme 'modus-operandi t)
-(global-display-line-numbers-mode)
-(setq column-number-mode t)
 (use-package all-the-icons
   :if (display-graphic-p)
   :defer)
@@ -78,12 +77,12 @@
 (load "complete")
 (load "keys")
 (load "org")
-(autoload '+org/return "org-autoload.el" "org return")
-(autoload '+org/dwim-at-point "org-autoload.el" "org dwim")
-(autoload '+org/shift-return "org-autoload.el" "org shift-return")
-(autoload 'launch-separate-emacs-in-terminal "keys-autoload" "launch")
-(autoload 'launch-separate-emacs-under-x "keys-autoload" "launch")
-(autoload 'restart-emacs "keys-autoload" "restart emacs")
+(autoload '+org/return "autoload" "org return")
+(autoload '+org/dwim-at-point "autoload" "org dwim")
+(autoload '+org/shift-return "autoload" "org shift-return")
+(autoload 'launch-separate-emacs-in-terminal "autoload" "launch")
+(autoload 'launch-separate-emacs-under-x "autoload" "launch")
+(autoload 'restart-emacs "autoload" "restart emacs")
 
 
 (use-package projectile
@@ -94,3 +93,6 @@
               ("C-x p" . projectile-command-map)))
 
 (setq file-name-handler-alist doom--file-name-handler-alist)
+(use-package gcmh
+  :config
+  (gcmh-mode 1))
