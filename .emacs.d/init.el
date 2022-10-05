@@ -40,7 +40,7 @@
   (auto-compile-on-load-mode)
   (auto-compile-on-save-mode))
 (setq vc-follow-symlinks t)
-(add-to-list 'load-path "~/.macdots/.emacs.d")
+(add-to-list 'load-path "~/.dotfiles/.emacs.d")
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
