@@ -6,3 +6,6 @@
 .emacs.d/elpa/
 .emacs.d/org-persist/
 .emacs.d/history
+.emacs.d/projectile-bookmarks.eld
+*.elc
+*.el~
