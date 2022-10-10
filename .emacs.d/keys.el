@@ -31,10 +31,14 @@
 (my-leader-keys
   :states 'normal
   "p" 'projectile-command-map
+  "a" 'org-agenda
   ":" 'execute-extended-command)
 (file-menu
   :states 'normal
-  "f" 'find-file) 
+  "f" 'find-file
+  "r" 'delete-file
+  "d" 'dired
+  "j" 'dired-jump) 
 (org-menu
   :states 'normal
   :keymaps 'org-mode-map
@@ -46,7 +50,7 @@
 
 (quit-menu
   :states 'normal
-  "q" 'delete-frame
+  "q" 'kill-emacs
   "w" 'quit-window
   "r" 'restart-emacs)
 (roam-org-menu

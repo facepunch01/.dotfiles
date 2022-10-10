@@ -1,7 +1,4 @@
 ;; -*- lexical-binding: t -*-
-(use-package good-scroll
-  :config
-  (good-scroll-mode 1))
 (use-package doom-modeline
   :hook (after-init . doom-modeline-mode))
 (use-package modus-themes)
@@ -15,4 +12,4 @@
   (setq which-key-idle-delay 1))
 
   (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-
+(pixel-scroll-precision-mode)
