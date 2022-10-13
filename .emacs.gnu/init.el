@@ -5,7 +5,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 (setq file-name-handler-alist nil)
-(add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono")) 
+(add-to-list 'default-frame-alist '(font . "Iosevka Comfy")) 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
@@ -40,7 +40,7 @@
   (auto-compile-on-load-mode)
   (auto-compile-on-save-mode))
 (setq vc-follow-symlinks t)
-(add-to-list 'load-path "~/.dotfiles/.emacs.d")
+(add-to-list 'load-path "~/.dotfiles/.emacs.gnu")
 (defun my/dashboard-banner ()
   """Set a dashboard banner including information on package initialization
    time and garbage collections."""
