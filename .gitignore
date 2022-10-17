@@ -9,3 +9,4 @@
 .emacs.gnu/projectile-bookmarks.eld
 *.elc
 *.el~
+.emacs.doom/
